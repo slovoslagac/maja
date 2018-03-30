@@ -1,7 +1,9 @@
 body {
     margin: 5%;
-}
+    background-image: url('../images/bg.jpg');
+    color: #4f4f4f;
 
+}
 
 .title {
     margin-bottom: 20px;

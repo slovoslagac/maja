@@ -41,7 +41,7 @@ if(isset($_POST["save_training"])) {
 
 </header>
 <h3 class="text-center title">Evidencija treninga</h3>
-<div id="accordion" class="container">
+<div id="accordion" class="container col-md-6 offset-md-3">
     <div class="card">
         <div class="card-header btn btn-link " id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
             <h5 class="mb-0 training_name">

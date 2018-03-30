@@ -1,0 +1,20 @@
+body {
+    margin: 5%;
+}
+
+
+.title {
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.training_name {
+    font: 400 18px Arial;
+}
+
+.save_button {
+    margin: 0 10px 10px 0;
+}

@@ -14,8 +14,10 @@ if(isset($_POST["save_training"])) {
     } else {
         $all = array();
     }
+    $training_id = $_POST['save_training'];
 
     print_r($all);
+    echo "<br>$training_id<br>";
 
 
 }
@@ -84,7 +86,54 @@ if(isset($_POST["save_training"])) {
                         </tr>
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-success float-right save_button" name="save_training">Success</button>
+                    <button type="submit" class="btn btn-success float-right save_button" name="save_training" value="17" >Success</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header btn btn-link collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <h5 class="mb-0 training_name">
+                4.4.2018 10:30
+            </h5>
+        </div>
+
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+                <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">R.B.</th>
+                            <th scope="col">Ime i prezime</th>
+                            <th scope="col">status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>
+                                <input type="checkbox" value="1" name="value_status[]">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>
+                                <input type="checkbox" value="2" name="value_status[]">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>
+                                <input type="checkbox" value="3"  name="value_status[]">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-success float-right save_button" name="save_training" value="17" >Success</button>
                 </form>
             </div>
         </div>

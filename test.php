@@ -6,6 +6,28 @@
  * Time: 14:09
  */
 
+require_once('includes/init.php');
+$rbr;
+$timeinterval;
+$alldata = getTrainingData();
+$curentdate = new DateTime();
+
+
+if (isset($_POST["save_training"])) {
+    if (isset($_POST["value_status"])) {
+        $all = $_POST["value_status"];
+    } else {
+        $all = array();
+    }
+    $training_id = $_POST['save_training'];
+
+    print_r($all);
+    echo "<br>$training_id<br>";
+
+
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -26,82 +48,69 @@
 
 </header>
 <h3 class="text-center title">Evidencija treninga</h3>
-    <div id="accordion">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Collapsible Group Item #1
-                    </button>
-                </h5>
-            </div>
+<div id="accordion" class="container col-md-6 offset-md-3">
+    <?php $current_time = '';
+    $training_id = '';
+    foreach ($alldata as $item)  {
+    if ($item->start_time != $current_time)
+    {
+    $current_time = $item->start_time; $current_time_object = new DateTime($current_time);
+    $timeinterval = date_diff($curentdate, $current_time_object); $timed = $timeinterval->format('%a'); $timeh = $timeinterval->format('%h');
+    $rbr = 0;
+    if ($training_id != '') {
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">R.B.</th>
-                            <th scope="col">Ime i prezime</th>
-                            <th scope="col">status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header" id="headingTwo">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Collapsible Group Item #2
-                    </button>
-                </h5>
-            </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header" id="headingThree">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Collapsible Group Item #3
-                    </button>
-                </h5>
-            </div>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-            </div>
+    ?>
+
+    </tbody>
+    </table>
+    <button type="submit" class="btn btn-success float-right save_button" name="save_training" value="<?php echo $training_id ?>">Success</button>
+    </form>
+</div>
+</div>
+</div>
+
+<?php } $training_id = $item->id ?>
+<div class="card">
+    <div class="card-header btn btn-link " id="heading<?php echo $training_id ?>" data-toggle="collapse" data-target="#collapse<?php echo $training_id ?>" aria-expanded="<?php echo ($timed == 0 and abs($timeh) < 3 ) ?"true" : "false"?>"
+         aria-controls="collapse<?php echo $training_id ?>">
+        <h4 class="mb-0 training_name">
+            <?php echo $current_time_object->format('d.m.Y H:i'); ?>
+        </h4>
+    </div>
+    <div id="collapse<?php echo $training_id ?>" class="collapse <?php echo ($timed == 0 and abs($timeh) < 3 ) ?"show" : ""?>" aria-labelledby="heading<?php echo $training_id ?>" data-parent="#accordion">
+        <div class="card-body">
+            <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">R.B.</th>
+                        <th scope="col">Ime i prezime</th>
+                        <th scope="col">status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    }
+                    $rbr = +1;
+                    ?>
+                    <tr>
+                        <th scope="row"><?php echo $rbr ?></th>
+                        <td><?php echo "$item->first_name $item->last_name ($item->birth_year)" ?></td>
+                        <td>
+                            <input class="text-center" type="checkbox" value="<?php echo $item->player_id ?>" name="value_status[]">
+                        </td>
+                    </tr>
+
+                    <?php } ?>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-success float-right save_button" name="save_training" value="<?php echo $training_id ?>">Success</button>
+            </form>
         </div>
     </div>
+</div>
+
+</div>
 <footer>
 
 </footer>

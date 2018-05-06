@@ -14,9 +14,13 @@ body {
 }
 
 .training_name {
-    font: 400 18px Arial;
+    font: 400 22px Arial;
 }
 
 .save_button {
     margin: 0 10px 10px 0;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
 }

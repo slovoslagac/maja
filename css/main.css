@@ -1,5 +1,5 @@
 body {
-    margin: 5%;
+    margin: 7%;
     background-image: url('../images/bg.jpg');
     color: #4f4f4f;
 
@@ -18,9 +18,9 @@ body {
 }
 
 .save_button {
-    margin: 0 10px 10px 0;
+    margin: 0 15px 15px 0;
 }
 
 input[type=checkbox] {
-    transform: scale(1.5);
+    transform: scale(1.7);
 }
